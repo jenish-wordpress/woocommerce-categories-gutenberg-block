@@ -1,54 +1,53 @@
 /**
- * Frontend JavaScript for WC Category Display Block
+ * Frontend JavaScript for Category Display for WooCommerce.
  */
-
-document.addEventListener("DOMContentLoaded", function () {
-	// Initialize all sliders on the page
-	const sliders = document.querySelectorAll(".wc-cat-slider .swiper");
-
-	sliders.forEach(function (sliderElement) {
-		// Skip if already initialized
-		if (sliderElement.swiper) {
+( function () {
+	function cat_display_init_sliders() {
+		if ( typeof Swiper === 'undefined' ) {
 			return;
 		}
 
-		// Get configuration from data attributes
-		const columns =
-			parseInt(sliderElement.closest(".wc-category-block").dataset.columns) ||
-			3;
+		var cat_display_sliders = document.querySelectorAll(
+			'.cat-display-layout-slider .swiper'
+		);
 
-		// Initialize Swiper if library is loaded
-		if (typeof Swiper !== "undefined") {
-			new Swiper(sliderElement, {
+		cat_display_sliders.forEach( function ( cat_display_swiper_el ) {
+			if ( cat_display_swiper_el.swiper ) {
+				return;
+			}
+
+			var cat_display_wrap    = cat_display_swiper_el.closest( '.cat-display-block' );
+			var cat_display_columns = parseInt( cat_display_wrap ? cat_display_wrap.dataset.columns : 3, 10 ) || 3;
+
+			new Swiper( cat_display_swiper_el, {
 				slidesPerView: 1,
 				spaceBetween: 20,
 				loop: false,
 				navigation: {
-					nextEl: sliderElement.querySelector(".swiper-button-next"),
-					prevEl: sliderElement.querySelector(".swiper-button-prev"),
+					nextEl: cat_display_swiper_el.querySelector( '.swiper-button-next' ),
+					prevEl: cat_display_swiper_el.querySelector( '.swiper-button-prev' ),
 				},
 				pagination: {
-					el: sliderElement.querySelector(".swiper-pagination"),
+					el: cat_display_swiper_el.querySelector( '.swiper-pagination' ),
 					clickable: true,
 				},
 				breakpoints: {
-					640: {
-						slidesPerView: Math.min(2, columns),
-					},
-					768: {
-						slidesPerView: Math.min(3, columns),
-					},
-					1024: {
-						slidesPerView: columns,
-					},
+					640:  { slidesPerView: Math.min( 2, cat_display_columns ) },
+					768:  { slidesPerView: Math.min( 3, cat_display_columns ) },
+					1024: { slidesPerView: cat_display_columns },
 				},
 				on: {
 					init: function () {
-						// Add loaded class
-						sliderElement.classList.add("swiper-initialized");
+						cat_display_swiper_el.classList.add( 'swiper-initialized' );
 					},
 				},
-			});
-		}
-	});
-});
+			} );
+		} );
+	}
+
+	if ( document.readyState === 'loading' ) {
+		document.addEventListener( 'DOMContentLoaded', cat_display_init_sliders );
+	} else {
+		cat_display_init_sliders();
+	}
+} )();

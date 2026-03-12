@@ -1,171 +1,189 @@
 <?php
 /**
- * Render callback for WC Category Display block
+ * Render callback for Category Display for WooCommerce block.
  *
- * @param array    $attributes Block attributes
- * @param string   $content    Block content
- * @param WP_Block $block      Block instance
+ * @param array    $attributes Block attributes.
+ * @param string   $content    Block content.
+ * @param WP_Block $block      Block instance.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
 
-// Check if WooCommerce is active
+// Check if WooCommerce is active.
 if ( ! class_exists( 'WooCommerce' ) ) {
-    return '<div class="wc-category-error">' . esc_html__( 'WooCommerce is not active.', 'wc-category-display' ) . '</div>';
+	echo '<div class="cat-display-error">' . esc_html__( 'WooCommerce is not active.', 'category-display-for-woocommerce' ) . '</div>';
+	return;
 }
 
-// Get block attributes with defaults
-$layout     = $attributes['layout'] ?? 'grid';
-$columns    = $attributes['columns'] ?? 3;
-$limit      = $attributes['limit'] ?? 6;
-$show_all   = $attributes['showAll'] ?? false;
-$order_by   = $attributes['orderBy'] ?? 'name';
-$order      = $attributes['order'] ?? 'ASC';
-$show_count = $attributes['showCount'] ?? false;
-$hide_empty = $attributes['hideEmpty'] ?? true;
+// Get block attributes with defaults — all prefixed with cat_display_block_.
+$cat_display_block_layout     = isset( $attributes['layout'] ) ? $attributes['layout'] : 'grid';
+$cat_display_block_columns    = isset( $attributes['columns'] ) ? (int) $attributes['columns'] : 3;
+$cat_display_block_limit      = isset( $attributes['limit'] ) ? (int) $attributes['limit'] : 6;
+$cat_display_block_show_all   = isset( $attributes['showAll'] ) ? (bool) $attributes['showAll'] : false;
+$cat_display_block_order_by   = isset( $attributes['orderBy'] ) ? $attributes['orderBy'] : 'name';
+$cat_display_block_order      = isset( $attributes['order'] ) ? $attributes['order'] : 'ASC';
+$cat_display_block_show_count = isset( $attributes['showCount'] ) ? (bool) $attributes['showCount'] : false;
+$cat_display_block_hide_empty = isset( $attributes['hideEmpty'] ) ? (bool) $attributes['hideEmpty'] : true;
 
-// Query arguments for getting categories
-$args = array(
-    'taxonomy'   => 'product_cat',
-    'orderby'    => $order_by,
-    'order'      => $order,
-    'hide_empty' => $hide_empty,
+// Query arguments.
+$cat_display_block_args = array(
+	'taxonomy'   => 'product_cat',
+	'orderby'    => $cat_display_block_order_by,
+	'order'      => $cat_display_block_order,
+	'hide_empty' => $cat_display_block_hide_empty,
 );
 
-if ( ! $show_all ) {
-    $args['number'] = $limit;
+if ( ! $cat_display_block_show_all ) {
+	$cat_display_block_args['number'] = $cat_display_block_limit;
 }
 
-$categories = get_terms( $args );
+$cat_display_block_categories = get_terms( $cat_display_block_args );
 
-if ( empty( $categories ) || is_wp_error( $categories ) ) {
-    return '<div class="wc-category-empty">' . esc_html__( 'No categories found.', 'wc-category-display' ) . '</div>';
+if ( empty( $cat_display_block_categories ) || is_wp_error( $cat_display_block_categories ) ) {
+	echo '<div class="cat-display-empty">' . esc_html__( 'No categories found.', 'category-display-for-woocommerce' ) . '</div>';
+	return;
 }
 
-// Helper function to render category item
-if ( ! function_exists( 'wc_category_display_render_item' ) ) {
-    function wc_category_display_render_item( $category, $show_count = false, $extra_class = '' ) {
-        if ( ! isset( $category->term_id ) ) {
-            return '';
-        }
+/**
+ * Render a single category item.
+ *
+ * @param object $cat_display_item_category   The category term object.
+ * @param bool   $cat_display_item_show_count Whether to show product count.
+ * @param string $cat_display_item_extra_class Extra CSS class (e.g. swiper-slide).
+ * @return string HTML output.
+ */
+if ( ! function_exists( 'cat_display_woo_render_item' ) ) {
+	function cat_display_woo_render_item( $cat_display_item_category, $cat_display_item_show_count = false, $cat_display_item_extra_class = '' ) {
+		if ( ! isset( $cat_display_item_category->term_id ) ) {
+			return '';
+		}
 
-        $link = get_term_link( $category->term_id, 'product_cat' );
-        if ( is_wp_error( $link ) ) {
-            return '';
-        }
+		$cat_display_item_link = get_term_link( $cat_display_item_category->term_id, 'product_cat' );
+		if ( is_wp_error( $cat_display_item_link ) ) {
+			return '';
+		}
 
-        $thumbnail_id = get_term_meta( $category->term_id, 'thumbnail_id', true );
-        $image_url = $thumbnail_id 
-            ? wp_get_attachment_url( $thumbnail_id ) 
-            : wc_placeholder_img_src();
+		$cat_display_item_thumbnail_id = get_term_meta( $cat_display_item_category->term_id, 'thumbnail_id', true );
+		$cat_display_item_image_url    = $cat_display_item_thumbnail_id
+			? wp_get_attachment_url( $cat_display_item_thumbnail_id )
+			: wc_placeholder_img_src();
 
-        $item_classes = array( 'wc-cat-item', $extra_class );
-        
-        ob_start();
-        ?>
-        <a href="<?php echo esc_url( $link ); ?>" class="<?php echo esc_attr( implode( ' ', array_filter( $item_classes ) ) ); ?>">
-            <div class="wc-cat-image">
-                <?php if ( $image_url ) : ?>
-                    <img 
-                        src="<?php echo esc_url( $image_url ); ?>" 
-                        alt="<?php echo esc_attr( $category->name ); ?>"
-                        loading="lazy"
-                    />
-                <?php endif; ?>
-            </div>
-            <div class="wc-cat-content">
-                <h4 class="wc-cat-title"><?php echo esc_html( $category->name ); ?></h4>
-                <?php if ( $show_count ) : ?>
-                    <span class="wc-cat-count">
-                        <?php 
-                        printf( 
-                            _n( '%s Product', '%s Products', $category->count, 'wc-category-display' ),
-                            number_format_i18n( $category->count )
-                        ); 
-                        ?>
-                    </span>
-                <?php endif; ?>
-            </div>
-        </a>
-        <?php
-        return ob_get_clean();
-    }
+		$cat_display_item_classes = array_filter( array( 'cat-display-item', $cat_display_item_extra_class ) );
+
+		ob_start();
+		?>
+		<a href="<?php echo esc_url( $cat_display_item_link ); ?>" class="<?php echo esc_attr( implode( ' ', $cat_display_item_classes ) ); ?>">
+			<div class="cat-display-image">
+				<?php if ( $cat_display_item_image_url ) : ?>
+					<img
+						src="<?php echo esc_url( $cat_display_item_image_url ); ?>"
+						alt="<?php echo esc_attr( $cat_display_item_category->name ); ?>"
+						loading="lazy"
+					/>
+				<?php endif; ?>
+			</div>
+			<div class="cat-display-content">
+				<h4 class="cat-display-title"><?php echo esc_html( $cat_display_item_category->name ); ?></h4>
+				<?php if ( $cat_display_item_show_count ) : ?>
+					<span class="cat-display-count">
+						<?php
+						echo esc_html(
+							sprintf(
+								/* translators: %s: number of products */
+								_n( '%s Product', '%s Products', $cat_display_item_category->count, 'category-display-for-woocommerce' ),
+								number_format_i18n( $cat_display_item_category->count )
+							)
+						);
+						?>
+					</span>
+				<?php endif; ?>
+			</div>
+		</a>
+		<?php
+		return ob_get_clean();
+	}
 }
 
-// Generate unique ID for slider
-$block_id = 'wc-cat-' . wp_unique_id();
+// Generate unique ID for this block instance.
+$cat_display_block_id = 'cat-display-' . wp_unique_id();
 
-// Wrapper classes
-$wrapper_classes = array(
-    'wc-category-block',
-    'wc-cat-' . $layout,
-    'wc-cat-cols-' . $columns,
+// Wrapper classes.
+$cat_display_block_wrapper_classes = array(
+	'cat-display-block',
+	'cat-display-layout-' . $cat_display_block_layout,
+	'cat-display-cols-' . $cat_display_block_columns,
 );
 
-$wrapper_attributes = get_block_wrapper_attributes( array(
-    'class' => implode( ' ', $wrapper_classes ),
-    'data-layout' => $layout,
-    'data-columns' => $columns,
-) );
+$cat_display_block_wrapper_attrs = get_block_wrapper_attributes(
+	array(
+		'class'        => implode( ' ', $cat_display_block_wrapper_classes ),
+		'data-layout'  => $cat_display_block_layout,
+		'data-columns' => (string) $cat_display_block_columns,
+	)
+);
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
-    <?php if ( $layout === 'slider' ) : ?>
-        <!-- Slider Layout -->
-        <div class="swiper" id="<?php echo esc_attr( $block_id ); ?>">
-            <div class="swiper-wrapper">
-                <?php foreach ( $categories as $category ) : 
-                    echo wc_category_display_render_item( $category, $show_count, 'swiper-slide' );
-                endforeach; ?>
-            </div>
-            
-            <!-- Navigation -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            
-            <!-- Pagination -->
-            <div class="swiper-pagination"></div>
-        </div>
+<div <?php echo $cat_display_block_wrapper_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() returns safely escaped output. ?>>
+	<?php if ( 'slider' === $cat_display_block_layout ) : ?>
 
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                if (typeof Swiper !== 'undefined') {
-                    new Swiper('#<?php echo esc_js( $block_id ); ?>', {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                        loop: <?php echo count( $categories ) > $columns ? 'true' : 'false'; ?>,
-                        navigation: {
-                            nextEl: '#<?php echo esc_js( $block_id ); ?> .swiper-button-next',
-                            prevEl: '#<?php echo esc_js( $block_id ); ?> .swiper-button-prev',
-                        },
-                        pagination: {
-                            el: '#<?php echo esc_js( $block_id ); ?> .swiper-pagination',
-                            clickable: true,
-                        },
-                        breakpoints: {
-                            640: {
-                                slidesPerView: Math.min(2, <?php echo (int) $columns; ?>),
-                            },
-                            768: {
-                                slidesPerView: Math.min(3, <?php echo (int) $columns; ?>),
-                            },
-                            1024: {
-                                slidesPerView: <?php echo (int) $columns; ?>,
-                            },
-                        },
-                    });
-                }
-            });
-        </script>
+		<div class="swiper" id="<?php echo esc_attr( $cat_display_block_id ); ?>">
+			<div class="swiper-wrapper">
+				<?php
+				foreach ( $cat_display_block_categories as $cat_display_block_category ) {
+					echo wp_kses_post( cat_display_woo_render_item( $cat_display_block_category, $cat_display_block_show_count, 'swiper-slide' ) );
+				}
+				?>
+			</div>
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-pagination"></div>
+		</div>
 
-    <?php else : ?>
-        <!-- Grid Layout -->
-        <div class="wc-cat-grid-container">
-            <?php foreach ( $categories as $category ) : 
-                echo wc_category_display_render_item( $category, $show_count );
-            endforeach; ?>
-        </div>
-    <?php endif; ?>
+		<script>
+		( function() {
+			var cat_display_slider_id = '<?php echo esc_js( $cat_display_block_id ); ?>';
+			function cat_display_init_slider() {
+				if ( typeof Swiper === 'undefined' ) return;
+				var cat_display_el = document.getElementById( cat_display_slider_id );
+				if ( ! cat_display_el || cat_display_el.swiper ) return;
+				new Swiper( cat_display_el, {
+					slidesPerView: 1,
+					spaceBetween: 20,
+					loop: <?php echo count( $cat_display_block_categories ) > $cat_display_block_columns ? 'true' : 'false'; ?>,
+					navigation: {
+						nextEl: '#' + cat_display_slider_id + ' .swiper-button-next',
+						prevEl: '#' + cat_display_slider_id + ' .swiper-button-prev',
+					},
+					pagination: {
+						el: '#' + cat_display_slider_id + ' .swiper-pagination',
+						clickable: true,
+					},
+					breakpoints: {
+						640:  { slidesPerView: Math.min( 2, <?php echo (int) $cat_display_block_columns; ?> ) },
+						768:  { slidesPerView: Math.min( 3, <?php echo (int) $cat_display_block_columns; ?> ) },
+						1024: { slidesPerView: <?php echo (int) $cat_display_block_columns; ?> },
+					},
+				} );
+			}
+			if ( document.readyState === 'loading' ) {
+				document.addEventListener( 'DOMContentLoaded', cat_display_init_slider );
+			} else {
+				cat_display_init_slider();
+			}
+		} )();
+		</script>
+
+	<?php else : ?>
+
+		<div class="cat-display-grid">
+			<?php
+			foreach ( $cat_display_block_categories as $cat_display_block_category ) {
+				echo wp_kses_post( cat_display_woo_render_item( $cat_display_block_category, $cat_display_block_show_count ) );
+			}
+			?>
+		</div>
+
+	<?php endif; ?>
 </div>

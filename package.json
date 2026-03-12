@@ -1,13 +1,13 @@
 {
-	"name": "wc-category-display",
+	"name": "category-display-for-woocommerce",
 	"version": "1.0.0",
-	"description": "Display WooCommerce categories in grid or slider layout",
-	"author": "Your Name",
+	"description": "Display product categories in grid or slider layouts for WooCommerce",
+	"author": "Jenish Dholakiya",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build",
-		"start": "wp-scripts start",
+		"build": "wp-scripts build src/index.js --output-path=build",
+		"start": "wp-scripts start src/index.js --output-path=build",
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {

@@ -1,10 +1,9 @@
-// Frontend styles for WC Category Display Block
+// Frontend styles for Category Display for WooCommerce
 
-.wc-category-block {
+.cat-display-block {
 	padding: 20px 0;
 
-	// Common item styles
-	.wc-cat-item {
+	.cat-display-item {
 		display: block;
 		text-decoration: none;
 		background: #fff;
@@ -18,17 +17,17 @@
 			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 			transform: translateY(-4px);
 
-			.wc-cat-image img {
+			.cat-display-image img {
 				transform: scale(1.05);
 			}
 		}
 
-		.wc-cat-image {
+		.cat-display-image {
 			position: relative;
 			width: 100%;
-			padding-top: 100%; // 1:1 aspect ratio
+			padding-top: 100%;
 			overflow: hidden;
-			background: #f8f9fa;
+			background: #f1f5f9;
 
 			img {
 				position: absolute;
@@ -39,13 +38,28 @@
 				object-fit: cover;
 				transition: transform 0.3s ease;
 			}
+
+			.cat-display-placeholder-img {
+				position: absolute;
+				inset: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				.dashicons {
+					font-size: 48px;
+					width: 48px;
+					height: 48px;
+					color: #94a3b8;
+				}
+			}
 		}
 
-		.wc-cat-content {
+		.cat-display-content {
 			padding: 15px;
 			text-align: center;
 
-			.wc-cat-title {
+			.cat-display-title {
 				margin: 0 0 5px;
 				font-size: 16px;
 				font-weight: 600;
@@ -53,7 +67,7 @@
 				line-height: 1.4;
 			}
 
-			.wc-cat-count {
+			.cat-display-count {
 				display: block;
 				font-size: 13px;
 				color: #64748b;
@@ -62,8 +76,8 @@
 	}
 
 	// Grid Layout
-	&.wc-cat-grid {
-		.wc-cat-grid-container {
+	&.cat-display-layout-grid {
+		.cat-display-grid {
 			display: grid;
 			gap: 20px;
 
@@ -72,12 +86,11 @@
 			}
 		}
 
-		// Column variations
-		&.wc-cat-cols-1 .wc-cat-grid-container {
+		&.cat-display-cols-1 .cat-display-grid {
 			grid-template-columns: repeat(1, 1fr);
 		}
 
-		&.wc-cat-cols-2 .wc-cat-grid-container {
+		&.cat-display-cols-2 .cat-display-grid {
 			grid-template-columns: repeat(1, 1fr);
 
 			@media (min-width: 640px) {
@@ -85,7 +98,7 @@
 			}
 		}
 
-		&.wc-cat-cols-3 .wc-cat-grid-container {
+		&.cat-display-cols-3 .cat-display-grid {
 			grid-template-columns: repeat(1, 1fr);
 
 			@media (min-width: 640px) {
@@ -97,7 +110,7 @@
 			}
 		}
 
-		&.wc-cat-cols-4 .wc-cat-grid-container {
+		&.cat-display-cols-4 .cat-display-grid {
 			grid-template-columns: repeat(2, 1fr);
 
 			@media (min-width: 768px) {
@@ -109,7 +122,7 @@
 			}
 		}
 
-		&.wc-cat-cols-5 .wc-cat-grid-container {
+		&.cat-display-cols-5 .cat-display-grid {
 			grid-template-columns: repeat(2, 1fr);
 
 			@media (min-width: 768px) {
@@ -121,7 +134,7 @@
 			}
 		}
 
-		&.wc-cat-cols-6 .wc-cat-grid-container {
+		&.cat-display-cols-6 .cat-display-grid {
 			grid-template-columns: repeat(2, 1fr);
 
 			@media (min-width: 640px) {
@@ -135,37 +148,36 @@
 	}
 
 	// Slider Layout
-	&.wc-cat-slider {
+	&.cat-display-layout-slider {
 		.swiper {
-			padding: 10px 5px 40px; // Extra padding for shadow and pagination
+			padding: 10px 5px 40px;
 			margin: -10px -5px -40px;
 
 			.swiper-slide {
 				height: auto;
 
-				.wc-cat-item {
+				.cat-display-item {
 					height: 100%;
 				}
 			}
 
-			// Navigation buttons
 			.swiper-button-prev,
 			.swiper-button-next {
 				color: #7e22ce;
 				width: 40px;
 				height: 40px;
-				background: white;
+				background: #fff;
 				border-radius: 50%;
 				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
-				&:after {
-					font-size: 20px;
-					font-weight: bold;
+				&::after {
+					font-size: 18px;
+					font-weight: 700;
 				}
 
 				&:hover {
 					background: #7e22ce;
-					color: white;
+					color: #fff;
 				}
 
 				&.swiper-button-disabled {
@@ -173,15 +185,9 @@
 				}
 			}
 
-			.swiper-button-prev {
-				left: 0;
-			}
+			.swiper-button-prev { left: 0; }
+			.swiper-button-next { right: 0; }
 
-			.swiper-button-next {
-				right: 0;
-			}
-
-			// Pagination
 			.swiper-pagination {
 				bottom: 10px;
 
@@ -202,9 +208,9 @@
 		}
 	}
 
-	// Empty/Error states
-	&.wc-category-empty,
-	&.wc-category-error {
+	// Error / empty states
+	.cat-display-error,
+	.cat-display-empty {
 		padding: 40px;
 		text-align: center;
 		background: #fef2f2;
@@ -214,32 +220,24 @@
 	}
 }
 
-// Responsive adjustments
 @media (max-width: 640px) {
-	.wc-category-block {
-		.wc-cat-item {
-			.wc-cat-content {
+	.cat-display-block {
+		.cat-display-item {
+			.cat-display-content {
 				padding: 12px;
 
-				.wc-cat-title {
-					font-size: 14px;
-				}
-
-				.wc-cat-count {
-					font-size: 12px;
-				}
+				.cat-display-title { font-size: 14px; }
+				.cat-display-count { font-size: 12px; }
 			}
 		}
 
-		&.wc-cat-slider {
+		&.cat-display-layout-slider {
 			.swiper-button-prev,
 			.swiper-button-next {
 				width: 32px;
 				height: 32px;
 
-				&:after {
-					font-size: 16px;
-				}
+				&::after { font-size: 14px; }
 			}
 		}
 	}

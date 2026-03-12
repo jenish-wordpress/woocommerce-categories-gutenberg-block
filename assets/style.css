@@ -1,9 +1,10 @@
-/* Additional frontend styles if needed */
-.wc-category-block .swiper:not(.swiper-initialized) {
-	opacity: 0.5;
+/* Category Display for WooCommerce — extra frontend styles */
+
+.cat-display-layout-slider .swiper:not(.swiper-initialized) {
+	opacity: 0.6;
 }
 
-.wc-category-block .swiper.swiper-initialized {
+.cat-display-layout-slider .swiper.swiper-initialized {
 	opacity: 1;
 	transition: opacity 0.3s ease;
 }

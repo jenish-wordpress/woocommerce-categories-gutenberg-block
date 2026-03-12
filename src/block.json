@@ -1,12 +1,13 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "custom/wc-category-display",
+	"name": "custom/category-display-for-woocommerce",
 	"version": "1.0.0",
-	"title": "WC Category Display",
+	"title": "Category Display for WooCommerce",
 	"category": "woocommerce",
 	"icon": "grid-view",
-	"description": "Display WooCommerce categories in grid or slider layout.",
+	"description": "Display product categories in grid or slider layout with full customisation.",
+	"keywords": ["category", "grid", "slider", "products", "woocommerce"],
 	"example": {},
 	"supports": {
 		"html": false,
@@ -46,7 +47,7 @@
 			"default": true
 		}
 	},
-	"textdomain": "wc-category-display",
+	"textdomain": "category-display-for-woocommerce",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
