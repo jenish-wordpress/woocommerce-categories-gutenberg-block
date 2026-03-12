@@ -1,0 +1,246 @@
+// Frontend styles for WC Category Display Block
+
+.wc-category-block {
+	padding: 20px 0;
+
+	// Common item styles
+	.wc-cat-item {
+		display: block;
+		text-decoration: none;
+		background: #fff;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s ease;
+		height: 100%;
+
+		&:hover {
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			transform: translateY(-4px);
+
+			.wc-cat-image img {
+				transform: scale(1.05);
+			}
+		}
+
+		.wc-cat-image {
+			position: relative;
+			width: 100%;
+			padding-top: 100%; // 1:1 aspect ratio
+			overflow: hidden;
+			background: #f8f9fa;
+
+			img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.3s ease;
+			}
+		}
+
+		.wc-cat-content {
+			padding: 15px;
+			text-align: center;
+
+			.wc-cat-title {
+				margin: 0 0 5px;
+				font-size: 16px;
+				font-weight: 600;
+				color: #1e293b;
+				line-height: 1.4;
+			}
+
+			.wc-cat-count {
+				display: block;
+				font-size: 13px;
+				color: #64748b;
+			}
+		}
+	}
+
+	// Grid Layout
+	&.wc-cat-grid {
+		.wc-cat-grid-container {
+			display: grid;
+			gap: 20px;
+
+			@media (max-width: 640px) {
+				grid-template-columns: repeat(1, 1fr);
+			}
+		}
+
+		// Column variations
+		&.wc-cat-cols-1 .wc-cat-grid-container {
+			grid-template-columns: repeat(1, 1fr);
+		}
+
+		&.wc-cat-cols-2 .wc-cat-grid-container {
+			grid-template-columns: repeat(1, 1fr);
+
+			@media (min-width: 640px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+
+		&.wc-cat-cols-3 .wc-cat-grid-container {
+			grid-template-columns: repeat(1, 1fr);
+
+			@media (min-width: 640px) {
+				grid-template-columns: repeat(2, 1fr);
+			}
+
+			@media (min-width: 1024px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+		}
+
+		&.wc-cat-cols-4 .wc-cat-grid-container {
+			grid-template-columns: repeat(2, 1fr);
+
+			@media (min-width: 768px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+
+			@media (min-width: 1024px) {
+				grid-template-columns: repeat(4, 1fr);
+			}
+		}
+
+		&.wc-cat-cols-5 .wc-cat-grid-container {
+			grid-template-columns: repeat(2, 1fr);
+
+			@media (min-width: 768px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+
+			@media (min-width: 1024px) {
+				grid-template-columns: repeat(5, 1fr);
+			}
+		}
+
+		&.wc-cat-cols-6 .wc-cat-grid-container {
+			grid-template-columns: repeat(2, 1fr);
+
+			@media (min-width: 640px) {
+				grid-template-columns: repeat(3, 1fr);
+			}
+
+			@media (min-width: 1024px) {
+				grid-template-columns: repeat(6, 1fr);
+			}
+		}
+	}
+
+	// Slider Layout
+	&.wc-cat-slider {
+		.swiper {
+			padding: 10px 5px 40px; // Extra padding for shadow and pagination
+			margin: -10px -5px -40px;
+
+			.swiper-slide {
+				height: auto;
+
+				.wc-cat-item {
+					height: 100%;
+				}
+			}
+
+			// Navigation buttons
+			.swiper-button-prev,
+			.swiper-button-next {
+				color: #7e22ce;
+				width: 40px;
+				height: 40px;
+				background: white;
+				border-radius: 50%;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+				&:after {
+					font-size: 20px;
+					font-weight: bold;
+				}
+
+				&:hover {
+					background: #7e22ce;
+					color: white;
+				}
+
+				&.swiper-button-disabled {
+					opacity: 0.35;
+				}
+			}
+
+			.swiper-button-prev {
+				left: 0;
+			}
+
+			.swiper-button-next {
+				right: 0;
+			}
+
+			// Pagination
+			.swiper-pagination {
+				bottom: 10px;
+
+				.swiper-pagination-bullet {
+					width: 10px;
+					height: 10px;
+					background: #cbd5e1;
+					opacity: 1;
+					transition: all 0.3s ease;
+
+					&.swiper-pagination-bullet-active {
+						background: #7e22ce;
+						width: 24px;
+						border-radius: 5px;
+					}
+				}
+			}
+		}
+	}
+
+	// Empty/Error states
+	&.wc-category-empty,
+	&.wc-category-error {
+		padding: 40px;
+		text-align: center;
+		background: #fef2f2;
+		border: 1px solid #fecaca;
+		border-radius: 8px;
+		color: #991b1b;
+	}
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+	.wc-category-block {
+		.wc-cat-item {
+			.wc-cat-content {
+				padding: 12px;
+
+				.wc-cat-title {
+					font-size: 14px;
+				}
+
+				.wc-cat-count {
+					font-size: 12px;
+				}
+			}
+		}
+
+		&.wc-cat-slider {
+			.swiper-button-prev,
+			.swiper-button-next {
+				width: 32px;
+				height: 32px;
+
+				&:after {
+					font-size: 16px;
+				}
+			}
+		}
+	}
+}

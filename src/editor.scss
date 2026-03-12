@@ -1,0 +1,86 @@
+// Editor styles for the block editor
+.wc-category-display-editor {
+	padding: 20px;
+	background: #f8f9fa;
+	border: 2px dashed #d0d5dd;
+	border-radius: 8px;
+
+	.wc-category-preview {
+		text-align: center;
+
+		.preview-icon {
+			margin-bottom: 15px;
+
+			.dashicons {
+				width: 60px;
+				height: 60px;
+				font-size: 60px;
+				color: #7e22ce;
+			}
+		}
+
+		h3 {
+			margin: 0 0 20px;
+			font-size: 20px;
+			font-weight: 600;
+			color: #1e293b;
+		}
+
+		.preview-settings {
+			background: white;
+			padding: 20px;
+			border-radius: 6px;
+			margin-bottom: 15px;
+			text-align: left;
+
+			.setting-item {
+				display: flex;
+				justify-content: space-between;
+				padding: 8px 0;
+				border-bottom: 1px solid #f1f5f9;
+
+				&:last-child {
+					border-bottom: none;
+				}
+
+				strong {
+					color: #475569;
+					font-weight: 600;
+				}
+
+				span {
+					color: #1e293b;
+				}
+
+				.dashicons {
+					color: #10b981;
+					width: 20px;
+					height: 20px;
+					font-size: 20px;
+					margin-right: 5px;
+				}
+			}
+		}
+
+		.preview-note {
+			color: #64748b;
+			font-size: 14px;
+			font-style: italic;
+			margin: 0;
+		}
+	}
+}
+
+// Inspector controls styling
+.block-editor-block-inspector {
+	.components-panel__body-title {
+		.components-panel__body-toggle {
+			font-weight: 600;
+		}
+	}
+
+	.components-base-control__help {
+		font-size: 12px;
+		color: #6b7280;
+	}
+}

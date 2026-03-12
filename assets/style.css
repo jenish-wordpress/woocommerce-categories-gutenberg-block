@@ -1,0 +1,9 @@
+/* Additional frontend styles if needed */
+.wc-category-block .swiper:not(.swiper-initialized) {
+	opacity: 0.5;
+}
+
+.wc-category-block .swiper.swiper-initialized {
+	opacity: 1;
+	transition: opacity 0.3s ease;
+}

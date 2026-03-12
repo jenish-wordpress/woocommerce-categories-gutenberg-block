@@ -1,0 +1,57 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "custom/wc-category-display",
+  "version": "1.0.0",
+  "title": "WC Category Display",
+  "category": "woocommerce",
+  "icon": "grid-view",
+  "description": "Display WooCommerce categories in grid or slider layout.",
+  "example": {},
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "layout": {
+      "type": "string",
+      "default": "grid"
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "limit": {
+      "type": "number",
+      "default": 6
+    },
+    "showAll": {
+      "type": "boolean",
+      "default": false
+    },
+    "orderBy": {
+      "type": "string",
+      "default": "name"
+    },
+    "order": {
+      "type": "string",
+      "default": "ASC"
+    },
+    "showCount": {
+      "type": "boolean",
+      "default": false
+    },
+    "hideEmpty": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "wc-category-display",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}
