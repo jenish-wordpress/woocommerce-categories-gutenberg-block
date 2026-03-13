@@ -42,9 +42,6 @@ block — no page builder needed, no upsells.
 **Slider Layout**
 ![Slider Layout](assets/screenshot-2.png)
 
-**Live Editor Preview**
-![Editor Preview](assets/screenshot-3.png)
-
 ---
 
 ## Installation
