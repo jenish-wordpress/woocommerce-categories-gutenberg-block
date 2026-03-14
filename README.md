@@ -55,8 +55,8 @@ No Elementor. No Divi. No Pro upsell for basic features.
 
 ## Screenshots
 
-| Grid Layout | Slider Layout | Live Editor Preview |
-|:-----------:|:-------------:|:-------------------:|
+| Grid Layout | Slider Layout |
+|:-----------:|:-------------:|
 | ![Grid Layout](assets/screenshot-1.png) | ![Slider Layout](assets/screenshot-2.png) 
 
 ---
