@@ -1,4 +1,4 @@
-import { __ } from "@wordpress/i18n";
+import { __, sprintf } from "@wordpress/i18n";
 import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -10,16 +10,57 @@ import {
 } from "@wordpress/components";
 import { useSelect } from "@wordpress/data";
 import { store as coreStore } from "@wordpress/core-data";
+import { useEffect, useState } from "@wordpress/element";
 import "./editor.scss";
 
 const TEXTDOMAIN = "category-display-for-woocommerce";
 
 /**
- * Single category card — mirrors the frontend HTML structure.
+ * Fetch WooCommerce category image via REST API.
+ * WooCommerce exposes thumbnail via /wc/v3/products/categories endpoint.
+ * We use apiFetch to get the image URL for each category by term ID.
+ */
+function useCategoryImage( termId ) {
+	const [ imageUrl, setImageUrl ] = useState( null );
+
+	useEffect( () => {
+		if ( ! termId ) return;
+
+		wp.apiFetch( {
+			path: `/wc/v3/products/categories/${ termId }`,
+		} )
+			.then( ( data ) => {
+				if ( data?.image?.src ) {
+					setImageUrl( data.image.src );
+				}
+			} )
+			.catch( () => {
+				setImageUrl( null );
+			} );
+	}, [ termId ] );
+
+	return imageUrl;
+}
+
+/**
+ * Single category card with WooCommerce image support.
  */
 function CategoryCard( { category, showCount } ) {
-	const imageUrl =
-		category?._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null;
+	const imageUrl = useCategoryImage( category.id );
+
+	const countText = showCount
+		? category.count === 1
+			? sprintf(
+				/* translators: %s: number of products */
+				__( "%s Product", TEXTDOMAIN ),
+				category.count
+			)
+			: sprintf(
+				/* translators: %s: number of products */
+				__( "%s Products", TEXTDOMAIN ),
+				category.count || 0
+			)
+		: null;
 
 	return (
 		<div className="cat-display-item">
@@ -36,12 +77,8 @@ function CategoryCard( { category, showCount } ) {
 				<h4 className="cat-display-title">
 					{ category.name || __( "Category", TEXTDOMAIN ) }
 				</h4>
-				{ showCount && (
-					<span className="cat-display-count">
-						{ category.count === 1
-							? sprintf( __( "%s Product", TEXTDOMAIN ), category.count )
-							: sprintf( __( "%s Products", TEXTDOMAIN ), category.count || 0 ) }
-					</span>
+				{ showCount && countText && (
+					<span className="cat-display-count">{ countText }</span>
 				) }
 			</div>
 		</div>
@@ -71,7 +108,6 @@ export default function Edit( { attributes, setAttributes } ) {
 				orderby: orderBy === "term_id" ? "id" : orderBy,
 				order: order.toLowerCase(),
 				hide_empty: hideEmpty,
-				_embed: true,
 			};
 
 			const data = select( coreStore ).getEntityRecords(
@@ -193,7 +229,11 @@ export default function Edit( { attributes, setAttributes } ) {
 				{ ! isLoading && displayCategories.length > 0 && layout === "grid" && (
 					<div className="cat-display-grid">
 						{ displayCategories.map( ( cat ) => (
-							<CategoryCard key={ cat.id } category={ cat } showCount={ showCount } />
+							<CategoryCard
+								key={ cat.id }
+								category={ cat }
+								showCount={ showCount }
+							/>
 						) ) }
 					</div>
 				) }
@@ -201,7 +241,11 @@ export default function Edit( { attributes, setAttributes } ) {
 				{ ! isLoading && displayCategories.length > 0 && layout === "slider" && (
 					<div className="cat-display-slider-preview">
 						{ displayCategories.slice( 0, columns ).map( ( cat ) => (
-							<CategoryCard key={ cat.id } category={ cat } showCount={ showCount } />
+							<CategoryCard
+								key={ cat.id }
+								category={ cat }
+								showCount={ showCount }
+							/>
 						) ) }
 						{ displayCategories.length > columns && (
 							<div className="cat-display-slider-more">
