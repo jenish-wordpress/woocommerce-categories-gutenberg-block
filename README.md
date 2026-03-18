@@ -1,28 +1,28 @@
 # Category Display for WooCommerce — Free Gutenberg Block Plugin
 
-[![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue?style=flat-square)](https://wordpress.org/plugins/category-display-for-woocommerce)
+[![WordPress](https://img.shields.io/badge/WordPress-6.0%2B-blue?style=flat-square)](https://wordpress.org)
 [![WooCommerce](https://img.shields.io/badge/WooCommerce-6.0%2B-96588a?style=flat-square)](https://woocommerce.com)
 [![PHP](https://img.shields.io/badge/PHP-7.4%2B-777BB4?style=flat-square)](https://php.net)
 [![License](https://img.shields.io/badge/License-GPL%20v2-green?style=flat-square)](https://www.gnu.org/licenses/gpl-2.0.html)
-[![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/category-display-for-woocommerce?style=flat-square&label=Version)](https://wordpress.org/plugins/category-display-for-woocommerce)
-[![Active Installs](https://img.shields.io/wordpress/plugin/installs/category-display-for-woocommerce?style=flat-square)](https://wordpress.org/plugins/category-display-for-woocommerce)
-[![Rating](https://img.shields.io/wordpress/plugin/rating/category-display-for-woocommerce?style=flat-square)](https://wordpress.org/plugins/category-display-for-woocommerce/reviews/)
+[![GitHub Stars](https://img.shields.io/github/stars/jenish-wordpress/woocommerce-categories-gutenberg-block?style=flat-square)](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/jenish-wordpress/woocommerce-categories-gutenberg-block?style=flat-square)](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/network/members)
 
-**Category Display for WooCommerce** is a free, lightweight native Gutenberg block that displays WooCommerce product categories in a responsive grid or slider layout — no page builder required, with live editor preview.
+> **Free native Gutenberg block to display WooCommerce product categories in a responsive grid or slider layout — with live editor preview, no page builder required.**
 
-🔗 [WordPress.org Plugin Page](https://wordpress.org/plugins/category-display-for-woocommerce)
-&nbsp;|&nbsp;
 📦 [Download Latest Release](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/releases)
 &nbsp;|&nbsp;
 🐛 [Report a Bug](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/issues)
 &nbsp;|&nbsp;
-💬 [Support Forum](https://wordpress.org/support/plugin/category-display-for-woocommerce)
+💡 [Request a Feature](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/issues)
+&nbsp;|&nbsp;
+🤝 [Contributing](#contributing)
 
 ---
 
 ## Table of Contents
 
-- [Overview](#overview)
+- [What Is This?](#what-is-this)
+- [Demo](#demo)
 - [Screenshots](#screenshots)
 - [Features](#features)
 - [Installation](#installation)
@@ -37,72 +37,92 @@
 
 ---
 
-## Overview
+## What Is This?
 
-Displaying WooCommerce product categories cleanly on a store homepage or landing page is one of the most common requirements — yet most available solutions either depend on a heavy page builder or sit behind a paid plan.
+**Category Display for WooCommerce** is a free, lightweight WordPress plugin that adds a native Gutenberg block for displaying WooCommerce product categories.
 
-**Category Display for WooCommerce** solves this with a single native Gutenberg block. It plugs directly into the WordPress block editor, fetches your real WooCommerce `product_cat` terms via the REST API, and renders them as a live preview inside the editor — exactly as they appear on the frontend.
+Most WooCommerce stores need product categories displayed on the homepage or shop page — in a grid or a slider. The available options always come with a catch: install a bloated page builder, pay for a Pro plugin, or write custom code.
 
-No Elementor. No Divi. No Pro upsell for basic features.
+This plugin solves it with a single block. Drop it into any page, configure it from the sidebar, and your categories appear — live, styled, and responsive.
 
 ### Who Is This For?
 
-- WooCommerce store owners who use the Gutenberg block editor
-- WordPress developers building client stores without a page builder
-- Developers looking for a clean, standards-compliant block plugin to extend
+- **WooCommerce store owners** who want categories displayed without installing Elementor or Divi
+- **WordPress developers** building client stores who need a clean, standards-compliant solution
+- **Freelancers and agencies** looking for a free, extendable block to use across projects
+- **Developers** who want to fork, extend, or learn from a well-structured Gutenberg block
+
+---
+
+## Demo
+
+### Block Editor — Live Preview
+
+> Upload your screen recording to the `assets/` folder and update the path below.
+
+https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/assets/demo.mp4
+
+The block fetches your real WooCommerce `product_cat` terms via the REST API and renders them live inside the Gutenberg editor — exactly as they appear on the frontend.
 
 ---
 
 ## Screenshots
 
-| Grid Layout | Slider Layout |
-|:-----------:|:-------------:|
-| ![Grid Layout](assets/screenshot-1.png) | ![Slider Layout](assets/screenshot-2.png) 
+### Frontend — Grid Layout
+![Grid Layout](assets/screenshot-1.png)
+
+### Frontend — Slider Layout
+![Slider Layout](assets/screenshot-2.png)
+
+### Block Editor — Grid Preview with Settings
+![Editor Grid](assets/screenshot-3.png)
+
+### Block Editor — Slider Preview
+![Editor Slider](assets/screenshot-4.png)
+
+### Block Settings Panel
+![Category Settings](assets/screenshot-5.png)
 
 ---
 
 ## Features
 
-### Layout & Display
+### Layout and Display
+
 | Feature | Details |
 |---|---|
-| Grid Layout | Responsive CSS grid, 1–6 columns, fluid breakpoints |
-| Slider Layout | Touch-enabled carousel — Swiper.js v11, bundled locally |
-| Live Editor Preview | Real `product_cat` terms rendered inside Gutenberg |
-| Wide & Full Alignment | Native block alignment support |
+| Grid Layout | Responsive CSS grid with 1–6 columns and fluid breakpoints |
+| Slider Layout | Touch-enabled carousel powered by Swiper.js v11, bundled locally |
+| Live Editor Preview | Real `product_cat` terms rendered inside Gutenberg via REST API |
+| Wide and Full Alignment | Native block alignment support out of the box |
 
 ### Category Controls
+
 | Feature | Details |
 |---|---|
 | Category Limit | Show all or limit to 1–50 categories |
-| Sort Options | Name, product count, term ID, or slug |
+| Sort Options | Sort by name, product count, term ID, or slug |
 | Order Control | Ascending or descending |
 | Product Count | Show or hide product count per category |
-| Hide Empty | Toggle categories with zero products |
+| Hide Empty Categories | Toggle categories with zero products on or off |
 
-### Performance & Standards
+### Performance and Standards
+
 | Feature | Details |
 |---|---|
-| No Page Builder | Native Gutenberg — works with any theme |
-| Local Swiper Bundle | No CDN, no external network requests |
-| Lazy Loading | `loading="lazy"` on all category images |
+| No Page Builder Required | Native Gutenberg block, works with any WordPress theme |
+| Swiper Bundled Locally | No CDN calls, no external network requests |
+| Lazy Loading Images | Native `loading="lazy"` on all category images |
 | PHPCS Compliant | Follows WordPress Coding Standards throughout |
-| Escaped Output | All output properly escaped — secure by default |
-| i18n Ready | Fully internationalised, `.pot` file included |
+| Secure Output | All output properly escaped — secure by default |
+| Translation Ready | Fully internationalised with i18n support |
 | Semantic HTML | Clean, accessible, SEO-friendly markup |
 
 ---
 
 ## Installation
 
-### From WordPress.org (Recommended)
-
-1. Go to **WordPress Admin → Plugins → Add New**
-2. Search for **Category Display for WooCommerce**
-3. Click **Install Now** then **Activate**
-4. Open any page in the block editor, add the **Category Display** block
-
-### Manual Installation
+### From GitHub Releases (Current)
 
 1. Download the latest ZIP from [Releases](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/releases)
 2. Go to **WordPress Admin → Plugins → Add New → Upload Plugin**
@@ -110,7 +130,7 @@ No Elementor. No Divi. No Pro upsell for basic features.
 
 ### Requirements
 
-| | Minimum |
+| Requirement | Minimum Version |
 |---|---|
 | WordPress | 6.0 |
 | WooCommerce | 6.0 |
@@ -123,13 +143,15 @@ No Elementor. No Divi. No Pro upsell for basic features.
 1. Make sure WooCommerce is installed and you have at least one product category
 2. Open any page or post in the Gutenberg block editor
 3. Click **+** and search for **Category Display**
-4. Insert the block — your live WooCommerce categories appear immediately
-5. Use the **Settings panel** on the right to:
-   - Switch between Grid and Slider layout
-   - Set the number of columns (1–6)
-   - Control how many categories to display
-   - Change sort order and direction
-   - Toggle product count and empty category visibility
+4. Insert the block — your live WooCommerce categories load immediately inside the editor
+5. Use the **Block Settings panel** on the right to configure:
+   - **Display Layout** — Grid or Slider
+   - **Columns** — 1 to 6 columns
+   - **Number of Categories** — limit or show all
+   - **Order By** — name, count, ID, or slug
+   - **Order** — ascending or descending
+   - **Show Product Count** — toggle on or off
+   - **Hide Empty Categories** — toggle on or off
 6. Publish or update the page
 
 ---
@@ -140,15 +162,15 @@ No Elementor. No Divi. No Pro upsell for basic features.
 
 - Node.js 16+
 - npm 8+
-- A local WordPress install with WooCommerce active
+- Local WordPress install with WooCommerce active
 
-### Clone & Build
+### Clone and Build
 
 ```bash
 # Clone the repository
 git clone https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block.git
 
-# Move into the plugin directory
+# Move into the plugin folder
 cd woocommerce-categories-gutenberg-block
 
 # Install dependencies
@@ -167,10 +189,10 @@ npm run build
 category-display-for-woocommerce/
 │
 ├── assets/
-│   ├── frontend.js               # Slider initialisation (vanilla JS, no jQuery)
+│   ├── frontend.js               # Slider initialisation — vanilla JS, no jQuery
 │   ├── style.css                 # Extra frontend styles
-│   ├── swiper-bundle.min.js      # Swiper.js v11 — bundled locally
-│   └── swiper-bundle.min.css     # Swiper.js styles — bundled locally
+│   ├── swiper-bundle.min.js      # Swiper.js v11 bundled locally
+│   └── swiper-bundle.min.css     # Swiper.js styles bundled locally
 │
 ├── build/                        # Compiled output — generated by npm run build
 │   ├── block.json
@@ -184,7 +206,7 @@ category-display-for-woocommerce/
 │   ├── index.js                  # Block registration entry point
 │   ├── edit.js                   # Editor component with live REST API preview
 │   ├── render.php                # PHP server-side render callback
-│   ├── style.scss                # Frontend styles (compiled to build/)
+│   ├── style.scss                # Frontend styles compiled to build/
 │   └── editor.scss               # Editor-only styles
 │
 ├── category-display-for-woocommerce.php    # Main plugin bootstrap file
@@ -196,7 +218,7 @@ category-display-for-woocommerce/
 
 ## CSS Classes for Custom Styling
 
-Override these classes in your theme's `style.css` or via **Appearance → Customize → Additional CSS**:
+Target these classes in your theme `style.css` or via **Appearance → Customize → Additional CSS**:
 
 ```css
 /* Main block wrapper */
@@ -206,54 +228,65 @@ Override these classes in your theme's `style.css` or via **Appearance → Custo
 .cat-display-layout-grid   { }
 .cat-display-layout-slider { }
 
-/* Column count modifiers (1 through 6) */
+/* Column count modifiers — 1 through 6 */
+.cat-display-cols-1 { }
+.cat-display-cols-2 { }
 .cat-display-cols-3 { }
+.cat-display-cols-4 { }
+.cat-display-cols-5 { }
+.cat-display-cols-6 { }
 
-/* Category card */
-.cat-display-item   { }
-.cat-display-image  { }
+/* Category card elements */
+.cat-display-item    { }
+.cat-display-image   { }
 .cat-display-content { }
-.cat-display-title  { }
-.cat-display-count  { }
+.cat-display-title   { }
+.cat-display-count   { }
 ```
 
 ---
 
 ## Roadmap
 
-The following features are planned for upcoming releases:
+Planned features for upcoming releases:
 
 - [ ] Custom card color and background options
-- [ ] Category image hover overlay with title
+- [ ] Category image hover overlay with title text
 - [ ] Hand-pick specific categories to display
 - [ ] Drag-and-drop custom category ordering
 - [ ] Ajax-powered live category filtering
-- [ ] Multiple slider skin options
-- [ ] Pro version with advanced layouts
+- [ ] Multiple slider skin and style options
+- [ ] Pro version with advanced layouts and design controls
 
-> Have a feature request? [Open an issue](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/issues) — community feedback shapes the roadmap.
+> Have a feature idea? [Open an issue](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/issues) — the roadmap is shaped by community feedback.
 
 ---
 
 ## FAQ
 
 **Does this plugin require WooCommerce?**
-Yes. WooCommerce must be installed and activated for the block to display categories.
+Yes. WooCommerce must be installed and activated. The block displays `product_cat` taxonomy terms which are registered by WooCommerce.
 
 **Does it work with any WordPress theme?**
-Yes. It is a native Gutenberg block and works with any theme that supports the block editor.
+Yes. It is a native Gutenberg block and works with any theme that supports the block editor — including block themes, FSE themes, and classic themes with Gutenberg support.
 
 **Is Swiper.js loaded from a CDN?**
-No. Swiper.js is bundled inside the plugin's `assets/` folder. No external network requests are made.
+No. Swiper.js is bundled inside the plugin `assets/` folder. No external network requests are made.
 
-**Does it show a live preview in the editor?**
-Yes. The block uses `@wordpress/core-data` to fetch real `product_cat` terms from the REST API and renders them live inside the editor.
+**Does it show a live preview in the block editor?**
+Yes. The block uses `@wordpress/core-data` and `wp.apiFetch` to fetch your real WooCommerce categories and renders them live inside the editor. What you see while building is exactly what visitors see on the frontend.
 
 **Can I display all categories without a limit?**
 Yes. Toggle **Show All Categories** in the block settings panel.
 
-**Will this affect my site's performance?**
-No. Images use native lazy loading, Swiper is loaded locally, and the block outputs clean semantic HTML with no render-blocking resources.
+**Will this slow down my site?**
+No. All images use native lazy loading, Swiper is served locally, and the block outputs clean semantic HTML with no render-blocking resources.
+
+**Can I use multiple instances on the same page?**
+Yes. Each block instance is independent with its own unique ID and settings.
+
+**Is it compatible with WooCommerce HPOS?**
+Yes. The block only reads product category taxonomy terms and does not interact with order storage.
 
 ---
 
@@ -267,7 +300,7 @@ Contributions are welcome. Please open an issue before submitting a pull request
 4. Push to your branch — `git push origin feature/your-feature-name`
 5. Open a Pull Request against the `main` branch
 
-Please follow [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/) for all PHP contributions.
+Please follow [WordPress Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/) for PHP and [WordPress JavaScript Coding Standards](https://developer.wordpress.org/coding-standards/wordpress-coding-standards/javascript/) for JS contributions.
 
 ---
 
@@ -276,9 +309,8 @@ Please follow [WordPress Coding Standards](https://developer.wordpress.org/codin
 | Channel | Link |
 |---|---|
 | Bug Reports | [GitHub Issues](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/issues) |
-| General Questions | [WordPress.org Support Forum](https://wordpress.org/support/plugin/category-display-for-woocommerce) |
 | Feature Requests | [GitHub Issues](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/issues) |
-| Leave a Review | [WordPress.org Reviews](https://wordpress.org/support/plugin/category-display-for-woocommerce/reviews/#new-post) |
+| Discussions | [GitHub Discussions](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/discussions) |
 
 ---
 
@@ -288,8 +320,8 @@ Please follow [WordPress Coding Standards](https://developer.wordpress.org/codin
 
 - Initial release
 - Grid layout with 1–6 responsive columns
-- Slider layout with Swiper.js v11 (bundled locally)
-- Live Gutenberg editor preview via WordPress REST API
+- Slider layout with Swiper.js v11 bundled locally
+- Live Gutenberg editor preview via WordPress REST API and WooCommerce REST API
 - Sort by name, count, ID, or slug — ascending or descending
 - Show or hide product count per category
 - Hide empty categories toggle
@@ -297,6 +329,7 @@ Please follow [WordPress Coding Standards](https://developer.wordpress.org/codin
 - Fully responsive — mobile, tablet, desktop
 - PHPCS compliant — WordPress Coding Standards throughout
 - Translation ready with i18n support
+- No CDN dependencies — all assets served locally
 
 ---
 
@@ -312,12 +345,9 @@ See [LICENSE](LICENSE) for the full license text.
 **Jenish Dholakiya**
 
 [![GitHub](https://img.shields.io/badge/GitHub-jenish--wordpress-181717?style=flat-square&logo=github)](https://github.com/jenish-wordpress)
-[![WordPress.org](https://img.shields.io/badge/WordPress.org-Plugin%20Page-21759b?style=flat-square&logo=wordpress)](https://wordpress.org/plugins/category-display-for-woocommerce)
 
 ---
 
 <p align="center">
-  If this plugin saved you time, consider giving it a ⭐ on GitHub and a
-  <a href="https://wordpress.org/support/plugin/category-display-for-woocommerce/reviews/#new-post">5-star review on WordPress.org</a>
-  — it helps other store owners and developers find it.
+  Found this useful? Give it a ⭐ on GitHub — it helps other WooCommerce developers and store owners find this plugin.
 </p>
