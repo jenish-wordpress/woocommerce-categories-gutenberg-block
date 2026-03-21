@@ -22,7 +22,6 @@
 ## Table of Contents
 
 - [What Is This?](#what-is-this)
-- [Demo](#demo)
 - [Screenshots](#screenshots)
 - [Features](#features)
 - [Installation](#installation)
@@ -54,18 +53,6 @@ This plugin solves it with a single block. Drop it into any page, configure it f
 
 ---
 
-## Demo
-
-### Block Editor — Live Preview
-
-> Upload your screen recording to the `assets/` folder and update the path below.
-
-https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/assets/demo.mp4
-
-The block fetches your real WooCommerce `product_cat` terms via the REST API and renders them live inside the Gutenberg editor — exactly as they appear on the frontend.
-
----
-
 ## Screenshots
 
 ### Frontend — Grid Layout
@@ -74,13 +61,13 @@ The block fetches your real WooCommerce `product_cat` terms via the REST API and
 ### Frontend — Slider Layout
 ![Slider Layout](assets/screenshot-2.png)
 
-### Block Editor — Grid Preview with Settings
-![Editor Grid](assets/screenshot-3.png)
+### Block Editor — Live Preview with Settings
+![Editor Preview](assets/screenshot-3.png)
 
 ### Block Editor — Slider Preview
 ![Editor Slider](assets/screenshot-4.png)
 
-### Block Settings Panel
+### Block Settings Panel — Category Controls
 ![Category Settings](assets/screenshot-5.png)
 
 ---
@@ -122,11 +109,12 @@ The block fetches your real WooCommerce `product_cat` terms via the REST API and
 
 ## Installation
 
-### From GitHub Releases (Current)
+### From GitHub Releases
 
 1. Download the latest ZIP from [Releases](https://github.com/jenish-wordpress/woocommerce-categories-gutenberg-block/releases)
 2. Go to **WordPress Admin → Plugins → Add New → Upload Plugin**
 3. Upload the ZIP and click **Activate**
+4. Open any page in the Gutenberg editor and add the **Category Display** block
 
 ### Requirements
 
@@ -287,6 +275,9 @@ Yes. Each block instance is independent with its own unique ID and settings.
 
 **Is it compatible with WooCommerce HPOS?**
 Yes. The block only reads product category taxonomy terms and does not interact with order storage.
+
+**Does it work without a page builder?**
+Yes. It is a standalone native Gutenberg block. Elementor, Divi, Beaver Builder, or any other page builder is not required.
 
 ---
 
